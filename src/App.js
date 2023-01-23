@@ -29,14 +29,45 @@
             // ES6 => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
             super( props );
 
+            /* 
+                [CMP] State
+                Define inner compenent value (state)
+            */
+                this.state = {
+                    cmpLoginFormValue: [
+                        {
+                            name: 'email',
+                            value: '',
+                            label: 'Your email',
+                            placeholder: 'Required min. 5 charts',
+                            type: 'email',
+                            min: 5,
+                            required: true
+                        },
+                        {
+                            name: 'password',
+                            value: '',
+                            label: 'Your password',
+                            placeholder: 'Required min. 5 charts',
+                            type: 'password',
+                            min: 5,
+                            required: true
+                        }
+                    ]
+                }
+            //
+
 			// Bind 'this within the needed methods
             this.onSubmit = this.onSubmit.bind( this );
         }
 
+        
+
 		/* 
 			[CMP] Methods
 		*/
-			async onSubmit( event ){                
+			async onSubmit( event ){         
+                console.log(event)
                 const connectedUser = await axios.get(`
                     http://localhost:3001/users?email=${ event.email }&password=${ event.password }
                 `);
@@ -64,7 +95,6 @@
 			}
 
             onLogout(){
-                console.log('onLogout')
                 /* 
                     [STORE] Dispatch
                 */
@@ -87,6 +117,7 @@
                     <div className="App">
                         <HeaderMain />
                         <FormMain 
+                            formvalue={ this.state.cmpLoginFormValue }
                             onSubmit={ this.onSubmit }
                         />
                     </div>
