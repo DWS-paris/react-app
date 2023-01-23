@@ -27,9 +27,14 @@
             [CMP] Methods
         */
             onSubmit( event ){
+                // Stop event
                 event.preventDefault();
 
-                console.log(event)
+                // Emit event to send value to parent component
+                this.props.onSubmit({
+                    email: 'julien@dwsapp.io',
+                    password: 'azertyuiop'
+                })
             }
         //
 

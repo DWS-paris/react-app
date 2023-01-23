@@ -1,4 +1,4 @@
-const userInfo = window.localStorage.getItem( 'user' ) || null
+const userInfo = JSON.parse( window.localStorage.getItem( 'user' ) ) || null
 
 /* 
     Definition and export
@@ -8,7 +8,7 @@ const userInfo = window.localStorage.getItem( 'user' ) || null
         switch( action.type ){
             case 'LOGIN_USER':
                 // Save user infos
-                window.localStorage.setItem( 'user', action.value );
+                window.localStorage.setItem( 'user', JSON.stringify( action.value ) );
                 
                 // Update state
                 return state = action.value;
