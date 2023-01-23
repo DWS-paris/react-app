@@ -18,6 +18,13 @@
         constructor( props ){
             // ES6 => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
             super( props );
+
+            // Bind 'this within the needed methods
+            this.onLogout = this.onLogout.bind( this );
+        }
+
+        onLogout(){
+            this.props.onLogout();
         }
 
         /* 
@@ -25,11 +32,31 @@
             Display componenet DOM
         */
         render(){
-            return(
-                <header>
-                    <h1>Hello world</h1>
-                </header>
-            )
+            if( this.props.user === null ){
+                return(
+                    <header>
+                        <h1>Bienvenue</h1>
+                    </header>
+                )
+            }
+            else{
+                return(
+                    <header>
+                        <h1>Vous êtes connecté en tant que { this.props.user.email }</h1>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <button
+                                        onClick= { this.onLogout }
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </header>
+                )
+            }
         }
     }
 //

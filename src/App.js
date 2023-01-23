@@ -14,8 +14,6 @@
 /* 
   [CMP] Main imports
 */
-    import './App.css'; 
-    
     // App componenets
     import HeaderMain from './components/HeaderMain';
     import FormMain from './components/FormMain';
@@ -64,6 +62,18 @@
                     //
                 }
 			}
+
+            onLogout(){
+                console.log('onLogout')
+                /* 
+                    [STORE] Dispatch
+                */
+                    store.dispatch({
+                        type: 'LOGOUT_USER',
+                        value: null
+                    })
+                //
+            }
 		//
 
         /* 
@@ -75,6 +85,7 @@
             if( this.props.user === null ){
                 return(
                     <div className="App">
+                        <HeaderMain />
                         <FormMain 
                             onSubmit={ this.onSubmit }
                         />
@@ -83,7 +94,12 @@
             }
             else{
                 return(
-                    <HeaderMain />
+                    <div className="App">
+                        <HeaderMain 
+                            onLogout={ this.onLogout }
+                        />
+                        <p>azertyui</p>
+                    </div>
                 )
             }
         }
