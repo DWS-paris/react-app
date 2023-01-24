@@ -22,7 +22,7 @@
     [CMP] Define compoennet
     Set component classe
 */
-    class SinglePostView extends Component{
+    class SingleItemView extends Component{
         // init
         constructor( props ){
             // ES6 => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
@@ -112,5 +112,5 @@
     [CMP] Export
     Export component classe
 */
-    export default connect( mapStateToPros )( SinglePostView );
+    export default connect( mapStateToPros )( SingleItemView );
 //

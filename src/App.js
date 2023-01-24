@@ -15,7 +15,7 @@
     // App views
     import HomeView from './views/HomeView';
     import DashboardView from './views/DashboardView';
-    import SinglePostView from './views/SinglePostView';
+    import SingleItemView from './views/SingleItemView';
 //
 
 /* 
@@ -80,7 +80,7 @@
                                 {/* Use the Routes directive to define App routes */}
                                 <Routes>
                                     <Route path='/' element={ <DashboardView/> } />
-                                    <Route path='/:schema/:id' element={ <SinglePostView/> } />
+                                    <Route path='/:schema/:id' element={ <SingleItemView/> } />
                                 </Routes>
                             </main>
                         </div>
