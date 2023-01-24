@@ -47,6 +47,7 @@
                             <ul>
                                 <li>
                                     <button
+                                        className='button'
                                         onClick= { this.onLogout }
                                     >
                                         Logout

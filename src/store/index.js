@@ -10,6 +10,7 @@
 
 /* 
     Definition and export
+    TODO: check createStore
 */
     export default createStore( rootReducer );
 //

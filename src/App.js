@@ -67,7 +67,6 @@
 			[CMP] Methods
 		*/
 			async onSubmit( event ){         
-                console.log(event)
                 const connectedUser = await axios.get(`
                     http://localhost:3001/users?email=${ event.email }&password=${ event.password }
                 `);
@@ -118,7 +117,7 @@
                         <HeaderMain />
                         <FormMain 
                             formvalue={ this.state.cmpLoginFormValue }
-                            onSubmit={ this.onSubmit }
+                            onSubmitFormMain={ this.onSubmit }
                         />
                     </div>
                 )
