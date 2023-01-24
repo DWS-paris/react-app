@@ -101,34 +101,34 @@
             this.onChangeForm = this.onChangeForm.bind( this );
         }
 
-        onChangeForm( type ){
-            this.setState({ activeForm: type })
-
-            console.log(this.activeForm)
-        }
-
-        
-
-		/* 
-			[CMP] Methods
-		*/
-			async onSubmit( event, type ){         
+        /* 
+            [CMP] Method
+            Set classe methods
+        */
+            // Bind "change" event on input tag
+            onChangeForm( type ){
+                this.setState({ activeForm: type })
+            }
+            
+            // Bind "submit" event on form tag
+			async onSubmit( event, type ){
                 let axiosRequest = null
 
+                // Check type to defien Axios request
                 if( type === 'login' ){
+                    // Log user with email and password
                     axiosRequest = await axios.get(`
                     http://localhost:3001/users?email=${ event.email }&password=${ event.password }
                 `);
                 }
                 else if( type === 'register' ){
+                    // Register user with state value
                     axiosRequest = await axios.post(
                         `http://localhost:3001/users`,
                         event
                     );
                 }
                 
-
-                console.log(axiosRequest)
 
                 /* 
                     [CHECK] Response
