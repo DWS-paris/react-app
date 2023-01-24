@@ -12,13 +12,6 @@
 //
 
 /* 
-  [CMP] Main imports
-*/
-    // App componenets
-    import PushPost from '../components/PushPost';
-//
-
-/* 
     [CMP] Define compoennet
     Set component classe
 */
