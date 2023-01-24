@@ -10,6 +10,9 @@
   import { Provider } from 'react-redux';
   import store from './store';
 
+  // Add router module
+  import { BrowserRouter } from 'react-router-dom';
+
   // Main definition
   import './index.css';
   import App from './App';
@@ -25,7 +28,10 @@
     <React.StrictMode>
       {/* Use the Provider ton inject store module */}
       <Provider store={ store }>
-        <App />
+        {/* User BrowserRouter to manipulate views */}
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>
   );
