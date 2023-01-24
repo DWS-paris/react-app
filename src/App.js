@@ -7,7 +7,14 @@
 
     // Store modules
     import { connect } from 'react-redux';
-    import store from './store/index'
+    import store from './store/index';
+
+    // Router modules
+    import { Routes, Route } from 'react-router-dom';
+
+    // App views
+    import HomeView from './views/HomeView';
+    import DashboardView from './views/DashboardView';
 //
 
 /* 
@@ -35,19 +42,48 @@
             //
         }
 
+        onLogout(){
+            /* 
+                [STORE] Dispatch
+                Dispatch action to change state value
+            */
+                store.dispatch({
+                    type: 'LOGOUT_USER',
+                    value: null
+                })
+            //
+        }
+
         /* 
             [CMP] Render
             Display componenet DOM
         */
             render(){
-                return(
-                    <div className="App">
-                        <HeaderMain/>
-                        <main>
-                            <p>MAIN</p>
-                        </main>
-                    </div>
-                )
+                if( this.props.user === null ){
+                    return(
+                        <div className="App">
+                            <main>
+                                {/* Use the Routes directive to define App routes */}
+                                <Routes>
+                                    <Route path='/' element={ <HomeView/> } />
+                                </Routes>
+                            </main>
+                        </div>
+                    )
+                }
+                else{
+                    return(
+                        <div className="App">
+                            <HeaderMain onLogout={ this.onLogout } />
+                            <main>
+                                {/* Use the Routes directive to define App routes */}
+                                <Routes>
+                                    <Route path='/' element={ <DashboardView/> } />
+                                </Routes>
+                            </main>
+                        </div>
+                    )
+                }
             }
         //
     }

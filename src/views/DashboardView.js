@@ -22,7 +22,7 @@
     [CMP] Define compoennet
     Set component classe
 */
-    class HomeView extends Component{
+    class DashboardView extends Component{
         // init
         constructor( props ){
             // ES6 => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super
@@ -112,49 +112,31 @@
 		/* 
 			[CMP] Methods
 		*/
-			async onSubmit( event, type ){         
-                let axiosRequest = null
-
-                if( type === 'login' ){
-                    axiosRequest = await axios.get(`
+			async onSubmit( event ){         
+                const connectedUser = await axios.get(`
                     http://localhost:3001/users?email=${ event.email }&password=${ event.password }
                 `);
-                }
-                else if( type === 'register' ){
-                    axiosRequest = await axios.post(
-                        `http://localhost:3001/users`,
-                        event
-                    );
-                }
-                
 
-                console.log(axiosRequest)
-
-                /* 
-                    [CHECK] Response
-                    TODO: make it real
-                */
-                    if( axiosRequest.data.length || type === 'register' ){
-                        /* 
-                            [STORE] Dispatch
-                        */
-                            store.dispatch({
-                                type: 'LOGIN_USER',
-                                value: type !== 'register' ? axiosRequest.data[0] : axiosRequest.data
-                            })
-                        //
-                    }
-                    else{
-                        /* 
-                            [STORE] Dispatch
-                        */
-                            store.dispatch({
-                                type: 'LOGOUT_USER',
-                                value: null
-                            })
-                        //
-                    }
-                //
+                if( connectedUser.data.length ){
+                    /* 
+                        [STORE] Dispatch
+                    */
+                        store.dispatch({
+                            type: 'LOGIN_USER',
+                            value: connectedUser.data[0]
+                        })
+                    //
+                }
+                else{
+                    /* 
+                        [STORE] Dispatch
+                    */
+                        store.dispatch({
+                            type: 'LOGOUT_USER',
+                            value: null
+                        })
+                    //
+                }
 			}
 		//
 
@@ -164,41 +146,11 @@
         */
         render(){
             { 
-                if( this.state.activeForm === 'login' ){
-                    return(
-                        <div className="home-view-component">
-                            <FormMain 
-                                formvalue={ this.state.cmpLoginFormValue }
-                                onSubmitFormMain={ event => this.onSubmit( event, 'login' ) }
-                            />
-
-                            <button
-                                className='button is-fullwidth mt-3'
-                                onClick={ event => this.onChangeForm('register') }
-                            >
-                                Register
-                            </button>
-                        </div>
-                    )
-                }
-                else if( this.state.activeForm === 'register' ){
-                    return(
-                        <div className="home-view-component-register">
-                            <h1>Register</h1>
-                            <FormMain 
-                                formvalue={ this.state.cmpRegisterFormValue }
-                                onSubmitFormMain={ event => this.onSubmit( event, 'register' ) }
-                            />
-
-                            <button
-                                className='button is-fullwidth mt-3'
-                                onClick={ event => this.onChangeForm('login') }
-                            >
-                                Login
-                            </button>
-                        </div>
-                    )
-                }
+                return(
+                    <div className="dashboard-view-component">
+                        <p>Hello { this.props.user.given_name }</p>
+                    </div>
+                )
             }
         }
     }
@@ -219,5 +171,5 @@
     [CMP] Export
     Export component classe
 */
-    export default connect( mapStateToPros )( HomeView );
+    export default connect( mapStateToPros )( DashboardView );
 //
