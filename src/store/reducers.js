@@ -6,12 +6,14 @@
 
     // Store module
     import user from './modules/user';
+    import posts from './modules/posts';
 //
 
 /* 
     Definition and export
 */
     export default combineReducers({
-        user: user
+        user: user,
+        posts: posts
     });
 //

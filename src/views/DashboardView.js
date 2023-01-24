@@ -95,49 +95,32 @@
                     ]
                 }
             //
-
-			// Bind 'this within the needed methods
-            this.onSubmit = this.onSubmit.bind( this );
-            this.onChangeForm = this.onChangeForm.bind( this );
         }
 
-        onChangeForm( type ){
-            this.setState({ activeForm: type })
+        /* 
+            [CMP] Methods
+            Define classes functions
+        */
+            // Get post list from API
+            async getPostList(){
+                // use Axios to send AJAX request
+                const axiosRequest = await axios.get(`http://localhost:3001/posts`);
 
-            console.log(this.activeForm)
-        }
+                // Dispatch store action
+                store.dispatch({
+                    type: 'POST_UPDATE',
+                    value: axiosRequest.data
+                })
+            }
+        //
+
+        
 
         
 
 		/* 
 			[CMP] Methods
 		*/
-			async onSubmit( event ){         
-                const connectedUser = await axios.get(`
-                    http://localhost:3001/users?email=${ event.email }&password=${ event.password }
-                `);
-
-                if( connectedUser.data.length ){
-                    /* 
-                        [STORE] Dispatch
-                    */
-                        store.dispatch({
-                            type: 'LOGIN_USER',
-                            value: connectedUser.data[0]
-                        })
-                    //
-                }
-                else{
-                    /* 
-                        [STORE] Dispatch
-                    */
-                        store.dispatch({
-                            type: 'LOGOUT_USER',
-                            value: null
-                        })
-                    //
-                }
-			}
 		//
 
         /* 
@@ -162,7 +145,8 @@
 */
     const mapStateToPros = state => {
         return{
-            user: state.user
+            user: state.user,
+            posts: state.posts,
         }
     }
 //
