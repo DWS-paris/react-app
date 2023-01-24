@@ -15,7 +15,7 @@
   [CMP] Main imports
 */
     // App componenets
-    import FormMain from '../components/FormMain';
+    import PushPost from '../components/PushPost';
 //
 
 /* 
@@ -103,9 +103,8 @@
         */
             // Get post list from API
             async getPostList(){
-                // use Axios to send AJAX request
+                // Use Axios to send AJAX request
                 const axiosRequest = await axios.get(`http://localhost:3001/posts`);
-                console.log('getPostList', axiosRequest.data)
 
                 // Dispatch store action
                 store.dispatch({
@@ -135,10 +134,34 @@
             Display componenet DOM
         */
         render(){
-            { 
+            /* 
+                Display post list
+                - create a component for PushPost (post title)
+                - loop on it
+            */
+
+            // Check if post list is not null
+            if( this.props.posts !== null ){
                 return(
                     <div className="dashboard-view-component">
-                        <p>Hello { this.props.user.given_name }</p>
+                        {/* Loop on post list */}
+                        {
+                            this.props.posts.map( ( post, idx ) => {
+                                return(
+                                    <PushPost
+                                        key={ 'push-post-item-' + idx }
+                                        singleitem={ post }
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                )
+            }
+            else{
+                return(
+                    <div className="dashboard-view-component">
+                        <p className='is-size-5'>Aucun post</p>
                     </div>
                 )
             }
