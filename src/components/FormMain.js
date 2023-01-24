@@ -33,7 +33,7 @@
             this.onSubmit = this.onSubmit.bind( this );
         }
 
-        onUpdateFormValue( event ){
+        onUpdateFormValue( event, item ){
             // Update component states with setState()
             // TODO: check form value
             this.setState( 
@@ -55,47 +55,48 @@
             [CMP] Render
             Display componenet DOM
         */
-        render(){
-            return(
-                <form onSubmit={ this.onSubmit }>
-                    {
-                        this.cmpFormValue.map( ( item, idx ) => {
-                            return(
-                                <fieldset key={ 'item-form-' + idx }>
-                                    <label 
-                                        htmlFor={ item.name } 
-                                        className='label'
-                                    >
-                                        { item.label }
-                                    </label>
+            render(){
+                return(
+                    <form onSubmit={ this.onSubmit }>
+                        {
+                            this.cmpFormValue.map( ( item, idx ) => {
+                                return(
+                                    <fieldset key={ 'item-form-' + idx }>
+                                        <label 
+                                            htmlFor={ item.name } 
+                                            className='label'
+                                        >
+                                            { item.label }
+                                        </label>
 
-                                    <input
-                                        className='input'
-                                        name={ item.name }
-                                        type={ item.type }
-                                        placeholder={ item.placeholder }
-                                        min={ item.min ? item.min : undefined }
-                                        max={ item.max ? item.max : undefined }
-                                        required={ item.required ? item.required : undefined }
-                                        value={ this.state[ item.name ] }
-                                        onChange={ this.onUpdateFormValue }
-                                    />
-                                </fieldset>
-                            )
-                        })
-                    }
+                                        <input
+                                            className='input'
+                                            name={ item.name }
+                                            type={ item.type }
+                                            placeholder={ item.placeholder }
+                                            min={ item.min ? item.min : undefined }
+                                            max={ item.max ? item.max : undefined }
+                                            required={ item.required ? item.required : undefined }
+                                            value={ this.state[ item.name ] }
+                                            onChange={ event => this.onUpdateFormValue( event, item)  }
+                                        />
+                                    </fieldset>
+                                )
+                            })
+                        }
 
 
-                    <button 
-                        type='submit' 
-                        className='mt-5 button is-primary is-small is-fullwidth'
-                        disabled={ !this.formIsValide }
-                    >
-                        OK
-                    </button>
-                </form>
-            )
-        }
+                        <button 
+                            type='submit' 
+                            className='mt-5 button is-primary is-small is-fullwidth'
+                            disabled={ !this.formIsValide }
+                        >
+                            OK
+                        </button>
+                    </form>
+                )
+            }
+        //
     }
 //
 
