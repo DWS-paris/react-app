@@ -105,6 +105,7 @@
             async getPostList(){
                 // use Axios to send AJAX request
                 const axiosRequest = await axios.get(`http://localhost:3001/posts`);
+                console.log('getPostList', axiosRequest.data)
 
                 // Dispatch store action
                 store.dispatch({
@@ -114,8 +115,14 @@
             }
         //
 
-        
-
+        /* 
+            [CMP] Hooks
+            Special event from the React object
+        */
+            componentDidMount(){
+                this.getPostList()
+            }
+        //
         
 
 		/* 
